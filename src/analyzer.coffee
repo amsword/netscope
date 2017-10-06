@@ -233,6 +233,13 @@ module.exports =
                     #memory
                     d.mem.activation = d.wOut*d.hOut*d.chOut*d.batchOut
 
+                when "shift"
+                    d.wIn = parent.wOut
+                    d.hIn = parent.hOut
+                    d.wOut = d.wIn
+                    d.hOut = d.hIn
+                    d.chOut = d.chIn = parent.chOut
+
                 when "softmax", "softmaxwithloss", "softmax_loss"
                     #dimensions
                     d.wOut = d.wIn
