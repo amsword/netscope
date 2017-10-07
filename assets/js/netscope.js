@@ -16022,6 +16022,21 @@ module.exports = Analyzer = (function() {
           d.batchOut = d.batchIn;
           d.mem.activation = d.wOut * d.hOut * d.chOut * d.batchOut;
           break;
+        case "tsvdata":
+          if (((ref3 = n.attribs.transform_param) != null ? ref3.crop_size : void 0) != null) {
+            d.wIn = d.hIn = n.attribs.transform_param.crop_size;
+            d.chIn = 3;
+            d.batchOut = 1;
+          } else {
+            onerror('Unknown Input Dimensions');
+            debugger;
+          }
+          d.wOut = d.wIn;
+          d.hOut = d.hIn;
+          d.chOut = d.chIn;
+          d.batchOut = d.batchIn;
+          d.mem.activation = d.wOut * d.hOut * d.chOut * d.batchOut;
+          break;
         case "convolution":
           params = n.attribs.convolution_param;
           kernel_w = (ref4 = params.kernel_w) != null ? ref4 : params.kernel_size;

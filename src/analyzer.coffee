@@ -53,6 +53,20 @@ module.exports =
                     #-- none
                     d.mem.activation = d.wOut*d.hOut*d.chOut*d.batchOut
 
+                when "tsvdata"
+                    if n.attribs.transform_param?.crop_size?
+                        d.wIn = d.hIn = n.attribs.transform_param.crop_size
+                        d.chIn = 3  # assume RGB
+                        d.batchOut = 1
+                    else
+                        onerror('Unknown Input Dimensions')
+                        debugger;
+                    # update output sizes
+                    d.wOut  = d.wIn
+                    d.hOut  = d.hIn
+                    d.chOut = d.chIn
+                    d.batchOut = d.batchIn
+
                 when "convolution"
                     #dimensions
                     params   = n.attribs.convolution_param
